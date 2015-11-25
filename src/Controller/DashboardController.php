@@ -20,7 +20,9 @@ class DashboardController extends AppController
     {
         $assignments = TableRegistry::get('Assignments');
         
-        $this->set('assignment', $assignments->get($assignmentId, ['contain' => ['Inputs']]));
-    }
-
+        $assignment = $assignments->get($assignmentId, ['contain' => ['Inputs', 'Users']]);
+        die(print_r($assignment, true));
+        
+        $this->set('assignment', $assignment);
+   }
 }

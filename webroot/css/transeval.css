@@ -1,0 +1,43 @@
+.input-segment {
+    margin-bottom:10px;
+}
+
+.button-image {
+    cursor:pointer;
+}
+
+/* unselected segment */
+div.input-segment .input-text {
+    display:block;
+}
+
+div.input-segment .input-text-concordia {
+    display:none;
+}
+
+div.input-segment .target-field {
+    display:none;
+}
+
+div.input-segment .suggestions {
+    display:none;
+}
+
+/* selected segment */
+div.input-segment.selected .input-text {
+    display:none;
+}
+
+div.input-segment.selected .input-text-concordia {
+    display:block;
+}
+
+div.input-segment.selected .target-field {
+    display:block;
+}
+
+div.input-segment.selected .suggestions {
+    display:block;
+}
+
+

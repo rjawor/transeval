@@ -89,11 +89,11 @@ CREATE TABLE IF NOT EXISTS `transevaldb`.`inputs` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `content` TEXT NULL,
   `pos` INT NULL,
-  `assignments_id` INT NOT NULL,
+  `assignment_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_inputs_assignments1_idx` (`assignments_id` ASC),
+  INDEX `fk_inputs_assignments1_idx` (`assignment_id` ASC),
   CONSTRAINT `fk_inputs_assignments1`
-    FOREIGN KEY (`assignments_id`)
+    FOREIGN KEY (`assignment_id`)
     REFERENCES `transevaldb`.`assignments` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -106,18 +106,19 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `transevaldb`.`users_assignments` ;
 
 CREATE TABLE IF NOT EXISTS `transevaldb`.`users_assignments` (
-  `users_id` INT NOT NULL,
-  `assignments_id` INT NOT NULL,
-  PRIMARY KEY (`users_id`, `assignments_id`),
-  INDEX `fk_users_has_assignments_assignments1_idx` (`assignments_id` ASC),
-  INDEX `fk_users_has_assignments_users1_idx` (`users_id` ASC),
+  `user_id` INT NOT NULL,
+  `assignment_id` INT NOT NULL,
+  `concordia_enabled` TINYINT(1) NULL,
+  PRIMARY KEY (`user_id`, `assignment_id`),
+  INDEX `fk_users_has_assignments_assignments1_idx` (`assignment_id` ASC),
+  INDEX `fk_users_has_assignments_users1_idx` (`user_id` ASC),
   CONSTRAINT `fk_users_has_assignments_users1`
-    FOREIGN KEY (`users_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `transevaldb`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_users_has_assignments_assignments1`
-    FOREIGN KEY (`assignments_id`)
+    FOREIGN KEY (`assignment_id`)
     REFERENCES `transevaldb`.`assignments` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -132,20 +133,20 @@ DROP TABLE IF EXISTS `transevaldb`.`targets` ;
 CREATE TABLE IF NOT EXISTS `transevaldb`.`targets` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `content` TEXT NULL,
-  `inputs_id` INT NOT NULL,
-  `users_id` INT NOT NULL,
+  `input_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
   `started` DATETIME NULL DEFAULT NULL,
   `ended` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_targets_inputs1_idx` (`inputs_id` ASC),
-  INDEX `fk_targets_users1_idx` (`users_id` ASC),
+  INDEX `fk_targets_inputs1_idx` (`input_id` ASC),
+  INDEX `fk_targets_users1_idx` (`user_id` ASC),
   CONSTRAINT `fk_targets_inputs1`
-    FOREIGN KEY (`inputs_id`)
+    FOREIGN KEY (`input_id`)
     REFERENCES `transevaldb`.`inputs` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_targets_users1`
-    FOREIGN KEY (`users_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `transevaldb`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

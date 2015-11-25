@@ -27,6 +27,10 @@ $cakeDescription = 'TransEval';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('transeval.css') ?>
+    
+    <?= $this->Html->script('jquery-1.11.3.min') ?>
+    <?= $this->Html->script('dashboard') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

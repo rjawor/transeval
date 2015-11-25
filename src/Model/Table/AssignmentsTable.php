@@ -33,6 +33,8 @@ class AssignmentsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->hasMany('Inputs');
+        
         $this->belongsTo('Languages', [
             'foreignKey' => 'source_lang_id'
         ]);
