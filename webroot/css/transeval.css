@@ -13,6 +13,7 @@ div.input-segment .input-text {
 
 div.input-segment .input-text-concordia {
     display:none;
+    margin-bottom:10px;
 }
 
 div.input-segment .target-field {
@@ -23,13 +24,13 @@ div.input-segment .suggestions {
     display:none;
 }
 
-/* selected segment */
+/* selected segment without Concordia */
 div.input-segment.selected .input-text {
-    display:none;
+    display:block;
 }
 
 div.input-segment.selected .input-text-concordia {
-    display:block;
+    display:none;
 }
 
 div.input-segment.selected .target-field {
@@ -37,7 +38,82 @@ div.input-segment.selected .target-field {
 }
 
 div.input-segment.selected .suggestions {
+    display:none;
+}
+
+/* selected segment with Concordia */
+div.input-segment.selected.concordia .input-text {
+    display:none;
+}
+
+div.input-segment.selected.concordia .input-text-concordia {
     display:block;
+}
+
+div.input-segment.selected.concordia .target-field {
+    display:block;
+}
+
+div.input-segment.selected.concordia .suggestions {
+    display:block;
+}
+
+.suggestionsInvisible {
+    display:none;
+}
+
+.suggestion {
+	text-decoration: underline;
+	font-weight: bold;
+    color:#003d4c;
+    cursor:pointer;
+}
+
+.fragmentDetails {
+    border-style: solid;
+    border-width: 5px;
+    border-color:#19424F;
+    border-radius: 10px;    
+    display:none;
+}
+
+.fragmentDetails.selected {
+    display:block;
+}
+
+.fragmentDetails table {
+    width:100%;
+}
+
+div.input-segment .input-text-concordia .matchedFragment {
+    cursor:pointer;
+}
+
+.matchedFragment {
+    background-color:#99CCFF;
+    border-style: solid;
+    border-width: 3px;
+    border-color:#99CCFF;
+    border-radius: 10px;
+    padding-left:3px;
+    padding-right:3px;
+    margin:0px;
+}
+
+.matchedFragment.selected {
+    border-color:#19424F;
+}
+
+#result-score {
+    font-style:italic;
+    margin-bottom:25px;
+}
+
+
+#result-sentence {
+    text-align:center;
+    font-size:24px;
+    white-space:pre;
 }
 
 
