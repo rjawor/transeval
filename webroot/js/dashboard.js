@@ -3,10 +3,18 @@ var concordiaUrl = 'http://concordia.vm.wmi.amu.edu.pl:8800';
 function next() {
     current = jQuery.data(document.body, "current");
     $('#input'+current).toggleClass("selected");
+    acceptTranslation();
+    
     current++;
+    
+    count = jQuery.data(document.body, "count");
     $('#input'+current).toggleClass("selected");
     jQuery.data(document.body, "current", current);
-    searchConcordia();
+    if (current == count) {
+        window.location.replace('/transeval/assignments/thankyou');
+    } else {
+        initiateTranslation();
+    }
 }
 
 function getCurrentSegment() {
@@ -14,10 +22,40 @@ function getCurrentSegment() {
     return $('div#input'+current+' div.input-text').html();
 }
 
-function initiateTranslation() {    
-    alert('init');
+function initiateTranslation() {
+    current = jQuery.data(document.body, "current");   
+    $.ajax({
+        url: '/transeval/targets/add',
+        headers: {          
+             Accept : 'application/json'   
+        }, 
+        type: 'post',
+        data: {
+                  input_id:$('#input'+current+' .input-id').val(),
+                  user_id:$('#input'+current+' .user-id').val()
+              },
+        success: function (data) {
+            $('#input'+current+' .target-id').val(data.target.id);
+        },
+    });
     searchConcordia();
 }
+
+function acceptTranslation() {
+    current = jQuery.data(document.body, "current");   
+    $.ajax({
+        url: '/transeval/targets/accept',
+        headers: {          
+             Accept : 'application/json'   
+        }, 
+        type: 'post',
+        data: {
+                  target_id:$('#input'+current+' .target-id').val(),
+                  content:$('#input'+current+' .target-field textarea').val()
+              }
+    });
+}
+
 
 function searchConcordia() {    
     var concordiaRequest = {

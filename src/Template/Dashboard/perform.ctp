@@ -7,13 +7,16 @@ Progress
     foreach ($assignment->inputs as $input) {
     ?>
         <div id="input<?=$input->pos?>" class="input-segment<?= $input->pos == 0 ? " selected":""?><?= $concordia_enabled?" concordia":"" ?>">
+            <input type="hidden" class="target-id" value="" />
+            <input type="hidden" class="input-id" value="<?= $input->id ?>" />
+            <input type="hidden" class="user-id" value="<?= $assignment->users[0]->id ?>" />
             <div class="input-text">
                 <?= $input->content?>
             </div>
             <div class="input-text-concordia">
             </div>
             <div class="target-field">
-                <input type="text" />
+                <textarea></textarea>
                 <button onclick="next()">Accept translation</button>
             </div>
             <div class="suggestions">
@@ -30,6 +33,7 @@ Progress
 
 <script>
     jQuery.data(document.body, "current", 0);
+    jQuery.data(document.body, "count", <?=count($assignment->inputs)?>);
     initiateTranslation();
 </script>
 

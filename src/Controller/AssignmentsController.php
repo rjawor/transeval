@@ -109,4 +109,8 @@ class AssignmentsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+    
+    public function thankyou() {
+    
+    }
 }
