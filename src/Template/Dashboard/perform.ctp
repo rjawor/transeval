@@ -3,13 +3,15 @@ Progress
 </nav>
 <div class="assignments index large-9 medium-8 columns content">
     <h4>Performing assignment: <?= $assignment->name ?> <?= $concordia_enabled?"with":"without" ?> Concordia</h4>
+    <input type="hidden" id="user-id" value="<?= $assignment->users[0]->id ?>" />
+    <input type="hidden" id="assignment-id" value="<?= $assignment->id ?>" />
+
     <?php
     foreach ($assignment->inputs as $input) {
     ?>
         <div id="input<?=$input->pos?>" class="input-segment<?= $input->pos == 0 ? " selected":""?><?= $concordia_enabled?" concordia":"" ?>">
             <input type="hidden" class="target-id" value="" />
             <input type="hidden" class="input-id" value="<?= $input->id ?>" />
-            <input type="hidden" class="user-id" value="<?= $assignment->users[0]->id ?>" />
             <div class="input-text">
                 <?= $input->content?>
             </div>

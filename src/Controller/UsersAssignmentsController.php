@@ -11,35 +11,7 @@ use App\Controller\AppController;
 class UsersAssignmentsController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Users', 'Assignments']
-        ];
-        $this->set('usersAssignments', $this->paginate($this->UsersAssignments));
-        $this->set('_serialize', ['usersAssignments']);
-    }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Users Assignment id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $usersAssignment = $this->UsersAssignments->get($id, [
-            'contain' => ['Users', 'Assignments']
-        ]);
-        $this->set('usersAssignment', $usersAssignment);
-        $this->set('_serialize', ['usersAssignment']);
-    }
 
     /**
      * Add method
@@ -89,6 +61,22 @@ class UsersAssignmentsController extends AppController
         $assignments = $this->UsersAssignments->Assignments->find('list', ['limit' => 200]);
         $this->set(compact('usersAssignment', 'users', 'assignments'));
         $this->set('_serialize', ['usersAssignment']);
+    }
+
+    public function complete()
+    {
+        if ($this->request->is('post')) {
+            $query = $this->UsersAssignments->find('all')->where(
+                                                       [
+                                                        'user_id'=>$this->request->data["user_id"],
+                                                        'assignment_id'=>$this->request->data["assignment_id"]
+                                                       ]);
+            $usersAssignment = $query->first();
+            $usersAssignment->completed = 1;
+            if (!$this->UsersAssignments->save($usersAssignment)) {
+                $this->log('The users assignment could not be saved: '.print_r($usersAssignment,true));
+            }
+        }
     }
 
     /**

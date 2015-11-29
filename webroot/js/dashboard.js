@@ -11,10 +11,26 @@ function next() {
     $('#input'+current).toggleClass("selected");
     jQuery.data(document.body, "current", current);
     if (current == count) {
-        window.location.replace('/transeval/assignments/thankyou');
+        completeAssignment();
+        //window.location.replace('/transeval/assignments/thankyou');
     } else {
         initiateTranslation();
     }
+}
+
+function completeAssignment() {
+    $.ajax({
+        url: '/transeval/usersAssignments/complete',
+        headers: {          
+             Accept : 'application/json'   
+        }, 
+        type: 'post',
+        data: {
+                  user_id:$('#user-id').val(),
+                  assignment_id:$('#assignment-id').val()
+              }
+    });
+    
 }
 
 function getCurrentSegment() {
@@ -32,7 +48,7 @@ function initiateTranslation() {
         type: 'post',
         data: {
                   input_id:$('#input'+current+' .input-id').val(),
-                  user_id:$('#input'+current+' .user-id').val()
+                  user_id:$('#user-id').val()
               },
         success: function (data) {
             $('#input'+current+' .target-id').val(data.target.id);
