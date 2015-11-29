@@ -48,18 +48,18 @@ $cakeDescription = 'TransEval';
                 <li><a href="/transeval/assignments">Assignments</a></li>
             </ul>
             <ul class="right">
-                <li>
+                
 			    <?php
                 if (is_null($this->request->session()->read('Auth.User.username'))) {
                 ?>
-                    <a href="/transeval/users/login">log in</a>
+                    <li><a href="/transeval/users/login">log in</a></li>
+                    <li><a href="/transeval/users/add">sign up</a></li>
                 <?php
                 } else {
-                    echo "<a href='/transeval/users/logout'>logged in as: <b>".$this->request->session()->read('Auth.User.username')."</b> (log out)</a>"; 
+                    echo "<li><a href='/transeval/users/logout'>logged in as: <b>".$this->request->session()->read('Auth.User.username')."</b> (log out)</a></li>"; 
                 }
 
-                ?></a>
-                </li>
+                ?>
             </ul>
         </section>
     </nav>

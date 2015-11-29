@@ -109,6 +109,7 @@ CREATE TABLE IF NOT EXISTS `transevaldb`.`users_assignments` (
   `user_id` INT NOT NULL,
   `assignment_id` INT NOT NULL,
   `concordia_enabled` TINYINT(1) NULL,
+  `completed` TINYINT(1) NULL,
   PRIMARY KEY (`user_id`, `assignment_id`),
   INDEX `fk_users_has_assignments_assignments1_idx` (`assignment_id` ASC),
   INDEX `fk_users_has_assignments_users1_idx` (`user_id` ASC),
@@ -163,12 +164,13 @@ CREATE TABLE IF NOT EXISTS `transevaldb`.`concordia_uses` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fragment` TEXT NULL,
   `word_count` INT NULL,
-  `overlay_score` VARCHAR(45) NULL,
-  `targets_id` INT NOT NULL,
+  `overlay_score` FLOAT NULL,
+  `target_id` INT NOT NULL,
+  `created` DATETIME NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_concordia_uses_targets1_idx` (`targets_id` ASC),
+  INDEX `fk_concordia_uses_targets1_idx` (`target_id` ASC),
   CONSTRAINT `fk_concordia_uses_targets1`
-    FOREIGN KEY (`targets_id`)
+    FOREIGN KEY (`target_id`)
     REFERENCES `transevaldb`.`targets` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

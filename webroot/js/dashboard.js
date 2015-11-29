@@ -79,12 +79,15 @@ function searchConcordia() {
 function renderResult(data) {
     current = jQuery.data(document.body, "current");
     
-//    var score = data['result']['bestOverlayScore']*100;
-//    res += '<div id="result-score">Concordia score: <b>'+score.toFixed(0)+'%</b></div>';
+    var markedSentence = '';
+
+    var pureScore = data['result']['bestOverlayScore'];
+    var score = pureScore*100;
+    markedSentence += '<input type="hidden" class="exact-result-score" value="'+pureScore+'" />';
+    markedSentence += '<span class="result-score">'+score.toFixed(0)+'%</span>';
     
     var inputSentence = $('div#input'+current+' div.input-text').html();
     
-    var markedSentence = '';
     var fragments = '';
     lastInsertedEnd = 0;
     for(var i = 0; i < data['result']['bestOverlay'].length; i++) {
@@ -128,5 +131,21 @@ function displayDetails(number) {
     $('#fragment'+current+'-'+number).addClass('selected');
 
     $('.fragmentDetails').removeClass('selected');
+
     $('#details'+current+'-'+number).addClass('selected');
+    
+    $.ajax({
+        url: '/transeval/concordiaUses/add',
+        headers: {          
+             Accept : 'application/json'   
+        }, 
+        type: 'post',
+        data: {
+                  overlay_score:$('#input'+current+' .input-text-concordia .exact-result-score').val(),
+                  target_id:$('#input'+current+' .target-id').val(),
+                  fragment:$('#fragment'+current+'-'+number).html(),
+                  word_count:$('#fragment'+current+'-'+number).html().split(' ').length
+              }
+    });
+
 }

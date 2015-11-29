@@ -116,4 +116,8 @@ div.input-segment .input-text-concordia .matchedFragment {
     white-space:pre;
 }
 
+.result-score {
+    font-weight:bold;
+}
+
 
