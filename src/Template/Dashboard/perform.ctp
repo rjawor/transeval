@@ -1,5 +1,5 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
-Progress
+&nbsp;
 </nav>
 <div class="assignments index large-9 medium-8 columns content">
     <h4>Performing assignment: <?= $assignment->name ?> <?= $concordia_enabled?"with":"without" ?> Concordia</h4>

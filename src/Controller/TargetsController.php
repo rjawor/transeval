@@ -40,8 +40,6 @@ class TargetsController extends AppController
     {
         $this->autorender = false;
         if ($this->request->is('post')) {
-            $this->log('accept:', 'info');
-            $this->log($this->request->data, 'info');
             $target = $this->Targets->get($this->request->data["target_id"]);
             $target->content = $this->request->data["content"];
             $target->accepted = true;

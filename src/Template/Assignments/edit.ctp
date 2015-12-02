@@ -1,27 +1,18 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $assignment->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $assignment->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Assignments'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Languages'), ['controller' => 'Languages', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Language'), ['controller' => 'Languages', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New Assignment'), ['action' => 'add']) ?>
+        <li><?= $this->Html->link(__('List Assignments'), ['action' => 'config']) ?></li>
     </ul>
 </nav>
 <div class="assignments form large-9 medium-8 columns content">
     <?= $this->Form->create($assignment) ?>
     <fieldset>
-        <legend><?= __('Edit Assignment') ?></legend>
+        <legend>Assign users to assignment: <?= $assignment->name?></legend>
+        <p>
+        Assignment will be assigned to all the users. Select from the list below the users who will be able to use Concordia.
+        </p>
         <?php
-            echo $this->Form->input('source_lang_id');
-            echo $this->Form->input('target_lang_id', ['options' => $languages, 'empty' => true]);
-            echo $this->Form->input('name');
             echo $this->Form->input('users._ids', ['options' => $users]);
         ?>
     </fieldset>

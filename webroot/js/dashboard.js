@@ -12,7 +12,7 @@ function next() {
     jQuery.data(document.body, "current", current);
     if (current == count) {
         completeAssignment();
-        //window.location.replace('/transeval/assignments/thankyou');
+        window.location.replace('/transeval/assignments/thankyou');
     } else {
         initiateTranslation();
     }
@@ -76,7 +76,7 @@ function acceptTranslation() {
 function searchConcordia() {    
     var concordiaRequest = {
         operation: 'concordiaSearch',
-        tmId: 2,
+        tmId: 1,
         pattern:getCurrentSegment()
     }
     

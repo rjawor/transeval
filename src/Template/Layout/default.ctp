@@ -45,7 +45,12 @@ $cakeDescription = 'TransEval';
         </ul>
         <section class="top-bar-section">
             <ul>
-                <li><a href="/transeval/assignments">Assignments</a></li>
+                <?php if ($this->fetch('title') != 'Dashboard') { ?>
+                <li><a href="/transeval/assignments">My assignments</a></li>
+                    <?php if ($this->request->session()->read('Auth.User.role_id') == 1) { ?>
+                    <li><a href="/transeval/assignments/config">Configure assignments</a></li>                    
+                    <?php } ?>
+                <?php } ?>
             </ul>
             <ul class="right">
                 
